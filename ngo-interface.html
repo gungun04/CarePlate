@@ -4,293 +4,1447 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CarePlate - NGO Dashboard</title>
-    <link rel="stylesheet" href="css/ngo.css">
+    <style>
+        :root {
+            --primary: #2e7d32;
+            --primary-light: #60ad5e;
+            --primary-dark: #005005;
+            --secondary: #ff8f00;
+            --secondary-light: #ffc046;
+            --secondary-dark: #c56000;
+            --white: #ffffff;
+            --gray-light: #f5f5f5;
+            --gray: #e0e0e0;
+            --gray-dark: #9e9e9e;
+            --text: #333333;
+            --danger: #d32f2f;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--gray-light);
+            color: var(--text);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .user-nav {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-info {
+            margin-right: 20px;
+            text-align: right;
+        }
+        
+        .user-name {
+            font-weight: bold;
+        }
+        
+        .user-org {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+        
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .main-content {
+            padding: 30px 0;
+        }
+        
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .dashboard-title {
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+        }
+        
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-light);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--white);
+            font-size: 24px;
+        }
+        
+        .stat-info h3 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        
+        .stat-info p {
+            font-size: 14px;
+            color: var(--gray-dark);
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .tab {
+            padding: 15px 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+            text-align: center;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab.active {
+            background-color: var(--gray-light);
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+        }
+        
+        .tab-content {
+            display: none;
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .food-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .food-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .food-img {
+            height: 180px;
+            background-color: var(--gray);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .food-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .food-type {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--secondary);
+            color: var(--white);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .food-details {
+            padding: 15px;
+        }
+        
+        .food-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .restaurant-name {
+            color: var(--gray-dark);
+            font-size: 14px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .restaurant-name i {
+            margin-right: 5px;
+            font-size: 12px;
+        }
+        
+        .food-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .food-meta div {
+            display: flex;
+            align-items: center;
+        }
+        
+        .food-meta i {
+            margin-right: 5px;
+            color: var(--primary);
+        }
+        
+        .food-description {
+            font-size: 14px;
+            color: var(--text);
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .food-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .btn {
+            padding: 10px 15px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-secondary {
+            background-color: var(--white);
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--primary-light);
+            color: var(--white);
+        }
+        
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+        
+        .table-responsive {
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--gray);
+        }
+        
+        th {
+            background-color: var(--gray-light);
+            color: var(--text);
+            font-weight: bold;
+        }
+        
+        tr:hover {
+            background-color: var(--gray-light);
+        }
+        
+        .status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-align: center;
+            display: inline-block;
+        }
+        
+        .status-pending {
+            background-color: #fff3e0;
+            color: var(--secondary-dark);
+        }
+        
+        .status-confirmed {
+            background-color: #e0f2f1;
+            color: #00796b;
+        }
+        
+        .status-completed {
+            background-color: #e8f5e9;
+            color: var(--primary-dark);
+        }
+        
+        .status-cancelled {
+            background-color: #ffebee;
+            color: var(--danger);
+        }
+        
+        .ratings {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .rating {
+            color: var(--secondary);
+        }
+        
+        .rating.empty {
+            color: var(--gray);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background-color: var(--white);
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .modal-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            color: var(--gray-dark);
+        }
+        
+        .modal-body {
+            padding: 20px;
+        }
+        
+        .modal-footer {
+            padding: 15px 20px;
+            border-top: 1px solid var(--gray);
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--gray);
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        select.form-control {
+            appearance: none;
+            padding-right: 30px;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239e9e9e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 16px;
+        }
+        
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .alert {
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        
+        .alert-success {
+            background-color: #e8f5e9;
+            color: var(--primary-dark);
+            border-left: 4px solid var(--primary);
+        }
+        
+        .alert-info {
+            background-color: #e1f5fe;
+            color: #0277bd;
+            border-left: 4px solid #0277bd;
+        }
+        
+        .alert-warning {
+            background-color: #fff3e0;
+            color: var(--secondary-dark);
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .alert-danger {
+            background-color: #ffebee;
+            color: var(--danger);
+            border-left: 4px solid var(--danger);
+        }
+        
+        .progress-container {
+            height: 8px;
+            background-color: var(--gray);
+            border-radius: 4px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: var(--primary);
+            border-radius: 4px;
+        }
+        
+        footer {
+            background-color: var(--white);
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 30px;
+            border-top: 1px solid var(--gray);
+        }
+        
+        .footer-content {
+            font-size: 14px;
+            color: var(--gray-dark);
+        }
+        
+        @media (max-width: 768px) {
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .food-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tab {
+                padding: 10px;
+                font-size: 14px;
+            }
+            
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <div>Care<span>Plate</span></div>
-                </div>
-                <nav>
-                    <ul>
-                        <li><a href="#" class="nav-active">Dashboard</a></li>
-                        <li><a href="#">Donations</a></li>
-                        <li><a href="#">Reports</a></li>
-                        <li><a href="#">Settings</a></li>
-                    </ul>
-                </nav>
+        <div class="container header-content">
+            <div class="logo">
+                <span>🍽️ CarePlate</span>
+            </div>
+            <div class="user-nav">
                 <div class="user-info">
-                    <div class="notification-badge">
-                        <span>🔔</span>
-                        <span class="badge">3</span>
-                    </div>
-                    <div class="user-avatar">H</div>
-                    <div>Hope Foundation</div>
+                    <div class="user-name">Hope Foundation</div>
+                    <div class="user-org">NGO Account</div>
                 </div>
+                <div class="avatar">HF</div>
             </div>
         </div>
     </header>
 
-    <main class="container dashboard">
-        <div class="dashboard-header">
-            <h1 class="dashboard-title">NGO Dashboard</h1>
-            <div class="dashboard-actions">
-                <select class="filter-dropdown">
-                    <option>All Areas</option>
-                    <option>Downtown</option>
-                    <option>Uptown</option>
-                    <option>Westside</option>
-                    <option>Eastside</option>
-                </select>
-                <div class="search-bar">
-                    <input type="text" placeholder="Search for donations...">
-                    <button>🔍</button>
+    <main class="main-content">
+        <div class="container">
+            <div class="dashboard-header">
+                <h1 class="dashboard-title">NGO Dashboard</h1>
+                <div>
+                    <p id="current-date"></p>
+                </div>
+            </div>
+
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-utensils"></i></div>
+                    <div class="stat-info">
+                        <h3>35</h3>
+                        <p>Available Food Items</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-truck"></i></div>
+                    <div class="stat-info">
+                        <h3>8</h3>
+                        <p>Pending Pickups</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                    <div class="stat-info">
+                        <h3>142</h3>
+                        <p>Completed Pickups</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-users"></i></div>
+                    <div class="stat-info">
+                        <h3>25</h3>
+                        <p>Restaurant Partners</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tabs">
+                <div class="tab active" data-tab="available">Available Food 🍲</div>
+                <div class="tab" data-tab="request">Request Pickup 🚛</div>
+                <div class="tab" data-tab="track">Track Donations 🔄</div>
+                <div class="tab" data-tab="feedback">Feedback System ⭐</div>
+            </div>
+
+            <div id="available-tab" class="tab-content active">
+                <div class="food-grid">
+                    <!-- Food Item 1 -->
+                    <div class="food-card">
+                        <div class="food-img">
+                            <img src="/api/placeholder/300/180" alt="Italian Pasta">
+                            <span class="food-type">Italian</span>
+                        </div>
+                        <div class="food-details">
+                            <h3 class="food-title">Italian Pasta & Garlic Bread</h3>
+                            <div class="restaurant-name">
+                                <i class="fas fa-store"></i> La Trattoria
+                            </div>
+                            <div class="food-meta">
+                                <div>
+                                    <i class="fas fa-weight"></i> 5 kg
+                                </div>
+                                <div>
+                                    <i class="fas fa-clock"></i> 3 hours left
+                                </div>
+                            </div>
+                            <p class="food-description">Freshly made pasta with tomato sauce and 20 pieces of garlic bread. Enough for 10-15 people.</p>
+                            <div class="food-actions">
+                                <button class="btn btn-primary request-btn" data-id="1">Request Pickup</button>
+                                <button class="btn btn-secondary view-details-btn" data-id="1">Details</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Food Item 2 -->
+                    <div class="food-card">
+                        <div class="food-img">
+                            <img src="/api/placeholder/300/180" alt="Sandwiches">
+                            <span class="food-type">Sandwiches</span>
+                        </div>
+                        <div class="food-details">
+                            <h3 class="food-title">Mixed Sandwich Platter</h3>
+                            <div class="restaurant-name">
+                                <i class="fas fa-store"></i> Sandwich Corner
+                            </div>
+                            <div class="food-meta">
+                                <div>
+                                    <i class="fas fa-weight"></i> 3 kg
+                                </div>
+                                <div>
+                                    <i class="fas fa-clock"></i> 4 hours left
+                                </div>
+                            </div>
+                            <p class="food-description">Assorted sandwich platter with vegetarian and non-vegetarian options. 25 sandwich halves.</p>
+                            <div class="food-actions">
+                                <button class="btn btn-primary request-btn" data-id="2">Request Pickup</button>
+                                <button class="btn btn-secondary view-details-btn" data-id="2">Details</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Food Item 3 -->
+                    <div class="food-card">
+                        <div class="food-img">
+                            <img src="/api/placeholder/300/180" alt="Indian Curry">
+                            <span class="food-type">Indian</span>
+                        </div>
+                        <div class="food-details">
+                            <h3 class="food-title">Butter Chicken & Naan</h3>
+                            <div class="restaurant-name">
+                                <i class="fas fa-store"></i> Taj Spice
+                            </div>
+                            <div class="food-meta">
+                                <div>
+                                    <i class="fas fa-weight"></i> 8 kg
+                                </div>
+                                <div>
+                                    <i class="fas fa-clock"></i> 2 hours left
+                                </div>
+                            </div>
+                            <p class="food-description">Butter chicken curry with 30 pieces of naan bread. Can serve approximately 20 people.</p>
+                            <div class="food-actions">
+                                <button class="btn btn-primary request-btn" data-id="3">Request Pickup</button>
+                                <button class="btn btn-secondary view-details-btn" data-id="3">Details</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Food Item 4 -->
+                    <div class="food-card">
+                        <div class="food-img">
+                            <img src="/api/placeholder/300/180" alt="Pastries">
+                            <span class="food-type">Bakery</span>
+                        </div>
+                        <div class="food-details">
+                            <h3 class="food-title">Assorted Pastries & Cakes</h3>
+                            <div class="restaurant-name">
+                                <i class="fas fa-store"></i> Sweet Delights
+                            </div>
+                            <div class="food-meta">
+                                <div>
+                                    <i class="fas fa-weight"></i> 4 kg
+                                </div>
+                                <div>
+                                    <i class="fas fa-clock"></i> 6 hours left
+                                </div>
+                            </div>
+                            <p class="food-description">Assortment of pastries, croissants, and cake slices. Approximately 40 pieces.</p>
+                            <div class="food-actions">
+                                <button class="btn btn-primary request-btn" data-id="4">Request Pickup</button>
+                                <button class="btn btn-secondary view-details-btn" data-id="4">Details</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Food Item 5 -->
+                    <div class="food-card">
+                        <div class="food-img">
+                            <img src="/api/placeholder/300/180" alt="Chinese Food">
+                            <span class="food-type">Chinese</span>
+                        </div>
+                        <div class="food-details">
+                            <h3 class="food-title">Fried Rice & Noodles</h3>
+                            <div class="restaurant-name">
+                                <i class="fas fa-store"></i> Dragon Palace
+                            </div>
+                            <div class="food-meta">
+                                <div>
+                                    <i class="fas fa-weight"></i> 7 kg
+                                </div>
+                                <div>
+                                    <i class="fas fa-clock"></i> 5 hours left
+                                </div>
+                            </div>
+                            <p class="food-description">Vegetable fried rice and hakka noodles with spring rolls. Can serve approximately 15 people.</p>
+                            <div class="food-actions">
+                                <button class="btn btn-primary request-btn" data-id="5">Request Pickup</button>
+                                <button class="btn btn-secondary view-details-btn" data-id="5">Details</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Food Item 6 -->
+                    <div class="food-card">
+                        <div class="food-img">
+                            <img src="/api/placeholder/300/180" alt="Pizza">
+                            <span class="food-type">Pizza</span>
+                        </div>
+                        <div class="food-details">
+                            <h3 class="food-title">Assorted Pizza Slices</h3>
+                            <div class="restaurant-name">
+                                <i class="fas fa-store"></i> Pizza House
+                            </div>
+                            <div class="food-meta">
+                                <div>
+                                    <i class="fas fa-weight"></i> 6 kg
+                                </div>
+                                <div>
+                                    <i class="fas fa-clock"></i> 3 hours left
+                                </div>
+                            </div>
+                            <p class="food-description">Mix of vegetarian and non-vegetarian pizza slices. Total of 5 full pizzas (40 slices).</p>
+                            <div class="food-actions">
+                                <button class="btn btn-primary request-btn" data-id="6">Request Pickup</button>
+                                <button class="btn btn-secondary view-details-btn" data-id="6">Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="request-tab" class="tab-content">
+                <div class="alert alert-info">
+                    <p>You have <strong>35</strong> food items available for pickup in your area. Use the form below to place a new pickup request.</p>
+                </div>
+                
+                <form id="pickup-form">
+                    <div class="form-group">
+                        <label class="form-label" for="food-item">Select Food Item</label>
+                        <select class="form-control" id="food-item" required>
+                            <option value="">-- Select Food Item --</option>
+                            <option value="1">Italian Pasta & Garlic Bread - La Trattoria (5 kg)</option>
+                            <option value="2">Mixed Sandwich Platter - Sandwich Corner (3 kg)</option>
+                            <option value="3">Butter Chicken & Naan - Taj Spice (8 kg)</option>
+                            <option value="4">Assorted Pastries & Cakes - Sweet Delights (4 kg)</option>
+                            <option value="5">Fried Rice & Noodles - Dragon Palace (7 kg)</option>
+                            <option value="6">Assorted Pizza Slices - Pizza House (6 kg)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="pickup-time">Preferred Pickup Time</label>
+                        <select class="form-control" id="pickup-time" required>
+                            <option value="">-- Select Pickup Time --</option>
+                            <option value="asap">As Soon As Possible</option>
+                            <option value="1h">Within 1 Hour</option>
+                            <option value="2h">Within 2 Hours</option>
+                            <option value="3h">Within 3 Hours</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="transportation">Transportation Method</label>
+                        <select class="form-control" id="transportation" required>
+                            <option value="">-- Select Transportation --</option>
+                            <option value="own">Own Transportation</option>
+                            <option value="volunteer">Volunteer Driver</option>
+                            <option value="delivery">Request Restaurant Delivery</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="beneficiaries">Number of Beneficiaries</label>
+                        <input type="number" class="form-control" id="beneficiaries" min="1" placeholder="Approximate number of people to be served" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="notes">Additional Notes</label>
+                        <textarea class="form-control" id="notes" placeholder="Any dietary requirements, special instructions, etc."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-block">Submit Pickup Request</button>
+                </form>
+            </div>
+
+            <div id="track-tab" class="tab-content">
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Food Items</th>
+                                <th>Restaurant</th>
+                                <th>Request Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#4582</td>
+                                <td>Vegetable Biryani & Raita</td>
+                                <td>Spice Garden</td>
+                                <td>Apr 3, 2025</td>
+                                <td><span class="status status-confirmed">Confirmed</span></td>
+                                <td>
+                                    <button class="btn btn-secondary view-pickup-btn" data-id="4582">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#4581</td>
+                                <td>Assorted Donuts & Pastries</td>
+                                <td>Donut Heaven</td>
+                                <td>Apr 3, 2025</td>
+                                <td><span class="status status-pending">Pending</span></td>
+                                <td>
+                                    <button class="btn btn-secondary view-pickup-btn" data-id="4581">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#4580</td>
+                                <td>Mixed Sandwich Platter</td>
+                                <td>Sandwich Corner</td>
+                                <td>Apr 2, 2025</td>
+                                <td><span class="status status-completed">Completed</span></td>
+                                <td>
+                                    <button class="btn btn-secondary view-pickup-btn" data-id="4580">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#4579</td>
+                                <td>Italian Pasta & Garlic Bread</td>
+                                <td>La Trattoria</td>
+                                <td>Apr 2, 2025</td>
+                                <td><span class="status status-completed">Completed</span></td>
+                                <td>
+                                    <button class="btn btn-secondary view-pickup-btn" data-id="4579">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#4578</td>
+                                <td>Cheese Burgers & Fries</td>
+                                <td>Burger Joint</td>
+                                <td>Apr 1, 2025</td>
+                                <td><span class="status status-cancelled">Cancelled</span></td>
+                                <td>
+                                    <button class="btn btn-secondary view-pickup-btn" data-id="4578">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#4577</td>
+                                <td>Chinese Noodles & Spring Rolls</td>
+                                <td>Dragon Palace</td>
+                                <td>Mar 31, 2025</td>
+                                <td><span class="status status-completed">Completed</span></td>
+                                <td>
+                                    <button class="btn btn-secondary view-pickup-btn" data-id="4577">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#4576</td>
+                                <td>Pizza Slices & Garlic Bread</td>
+                                <td>Pizza House</td>
+                                <td>Mar 30, 2025</td>
+                                <td><span class="status status-completed">Completed</span></td>
+                                <td>
+                                    <button class="btn btn-secondary view-pickup-btn" data-id="4576">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#4575</td>
+                                <td>Assorted Pastries & Cakes</td>
+                                <td>Sweet Delights</td>
+                                <td>Mar 30, 2025</td>
+                                <td><span class="status status-completed">Completed</span></td>
+                                <td>
+                                    <button class="btn btn-secondary view-pickup-btn" data-id="4575">View</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="feedback-tab" class="tab-content">
+                <div class="alert alert-warning">
+                    <p>Providing feedback helps restaurants improve their donations and helps other NGOs make informed decisions.</p>
+                </div>
+                
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Restaurant</th>
+                                <th>Food Items</th>
+                                <th>Pickup Date</th>
+                                <th>Rating</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#4580</td>
+                                <td>Sandwich Corner</td>
+                                <td>Mixed Sandwich Platter</td>
+                                <td>Apr 2, 2025</td>
+                                <td>
+                                    <div class="ratings">
+                                        <span class="rating">★</span>
+                                        <span class="rating">★</span>
+                                        <span class="rating">★</span>
+                                        <span class="rating">★</span>
+                                        <span class="rating empty">★</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="btn btn-secondary rate-btn" data-id="4580">Update</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#4579</td>
+                                <td>La Trattoria</td>
+                                <td>Italian Pasta & Garlic Bread</td>
+                                <td>Apr 2, 2025</td>
+                                <td>
+                                    <div class="ratings">
+                                        <span class="rating">★</span>
+                                        <span class="rating">★</span>
+                                        <span class="rating">★</span>
+                                        <span class="rating">★</span>
+                                        <span class="rating">★</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="btn btn-secondary rate-btn" data-id="4579">Update</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#4577</td>
+                                <td>Dragon Palace</td>
+                                <td>Chinese Noodles & Spring Rolls</td>
+                                <td>Mar 31, 2025</td>
+                                <td>
+                                    <div class="ratings">
+                                        <span class="rating">★</span>
+                                        <span class="rating">★</span>
+                                        <span class="rating">★</span>
+                                        <span class="rating empty">★</span>
+                                        <span class="rating empty">★</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="btn btn-secondary rate-btn" data-id="4577">Update</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#4576</td>
+                                <td>Pizza House</td>
+                                <td>Pizza Slices & Garlic Bread</td>
+                                <td>Mar 30, 2025</td>
+                                <td>
+                                    <div class="ratings">
+                                        <span class="rating">★</span>
+                                        <span class="rating">★</span>
+                                        <span class="rating">★</span>
+                                        <span class="rating">★</span>
+                                        <span class="rating empty">★</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="btn btn-secondary rate-btn" data-id="4576">Update</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#4575</td>
+                                <td>Sweet Delights</td>
+                                <td>Assorted Pastries & Cakes</td>
+                                <td>Mar 30, 2025</td>
+                                <td>
+                                    <div class="ratings">
+                                        <span class="rating">★</span>
+                                        <span class="rating">★</span>
+                                        <span class="rating">★</span>
+                                        <span class="rating">★</span>
+                                        <span class="rating">★</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="btn btn-secondary rate-btn" data-id="4575">Update</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
+    </main>
 
-        <div class="stats-cards">
-            <div class="stat-card">
-                <div class="stat-card-title">FOOD SAVED</div>
-                <div class="stat-card-value">2,543 KG</div>
-                <div class="stat-card-subtitle">
-                    <span>↑</span> 15% from last month
+    <!-- Food Details Modal -->
+    <div id="food-details-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Food Details</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="food-details-content">
+                    <!-- Will be filled with JavaScript -->
                 </div>
             </div>
-            <div class="stat-card">
-                <div class="stat-card-title">MEALS PROVIDED</div>
-                <div class="stat-card-value">10,172</div>
-                <div class="stat-card-subtitle">
-                    <span>↑</span> 12% from last month
-                </div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-card-title">ACTIVE PARTNERS</div>
-                <div class="stat-card-value">32</div>
-                <div class="stat-card-subtitle">
-                    <span>↑</span> 3 new this month
-                </div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-card-title">CO₂ EMISSIONS SAVED</div>
-                <div class="stat-card-value">4.8 TON</div>
-                <div class="stat-card-subtitle">
-                    <span>↑</span> 18% from last month
-                </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary modal-close-btn">Close</button>
+                <button class="btn btn-primary request-pickup-modal-btn">Request Pickup</button>
             </div>
         </div>
+    </div>
 
-        <div class="tab-container">
-            <ul class="tabs">
-                <li class="tab-item tab-active" data-tab="available">Available Food</li>
-                <li class="tab-item" data-tab="tracking">Track Requested Donations</li>
-                <li class="tab-item" data-tab="feedback">Feedback System</li>
-            </ul>
-        </div>
-
-        <div class="tab-content">
-            <!-- Available Food Tab -->
-            <div class="tab-pane available-tab" id="available-tab">
-                <div class="food-cards">
-                    <!-- Food Card 1 -->
-                    <div class="food-card">
-                        <div class="food-image" style="background-image: url('/api/placeholder/400/320')"></div>
-                        <div class="food-details">
-                            <div class="food-title">Mixed Pasta Trays</div>
-                            <div class="restaurant-name">Italian Bistro</div>
-                            <div class="food-meta">
-                                <div><span>🕒</span> Expires in 6 hrs</div>
-                                <div><span>🍽️</span> 20 servings</div>
-                            </div>
-                            <div class="food-meta">
-                                <div><span>📍</span> 2.3 km away</div>
-                                <div><span>🔥</span> Hot food</div>
-                            </div>
-                            <div class="food-actions">
-                                <button class="btn btn-primary" onclick="openRequestModal()">Request Pickup</button>
-                                <button class="btn btn-secondary">More Info</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Food Card 2 -->
-                    <div class="food-card">
-                        <div class="food-image" style="background-image: url('/api/placeholder/400/320')"></div>
-                        <div class="food-details">
-                            <div class="food-title">Fresh Baked Bread & Pastries</div>
-                            <div class="restaurant-name">Morning Bakery</div>
-                            <div class="food-meta">
-                                <div><span>🕒</span> Expires in 10 hrs</div>
-                                <div><span>🍽️</span> 40 servings</div>
-                            </div>
-                            <div class="food-meta">
-                                <div><span>📍</span> 1.5 km away</div>
-                                <div><span>❄️</span> Room temp</div>
-                            </div>
-                            <div class="food-actions">
-                                <button class="btn btn-primary" onclick="openRequestModal()">Request Pickup</button>
-                                <button class="btn btn-secondary">More Info</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Food Card 3 -->
-                    <div class="food-card">
-                        <div class="food-image" style="background-image: url('/api/placeholder/400/320')"></div>
-                        <div class="food-details">
-                            <div class="food-title">Vegetable Stir Fry</div>
-                            <div class="restaurant-name">Green Garden</div>
-                            <div class="food-meta">
-                                <div><span>🕒</span> Expires in 4 hrs</div>
-                                <div><span>🍽️</span> 15 servings</div>
-                            </div>
-                            <div class="food-meta">
-                                <div><span>📍</span> 0.8 km away</div>
-                                <div><span>🔥</span> Hot food</div>
-                            </div>
-                            <div class="food-actions">
-                                <button class="btn btn-primary" onclick="openRequestModal()">Request Pickup</button>
-                                <button class="btn btn-secondary">More Info</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Food Card 4 -->
-                    <div class="food-card">
-                        <div class="food-image" style="background-image: url('/api/placeholder/400/320')"></div>
-                        <div class="food-details">
-                            <div class="food-title">Fruit Platters</div>
-                            <div class="restaurant-name">Juice Bar & Cafe</div>
-                            <div class="food-meta">
-                                <div><span>🕒</span> Expires in 8 hrs</div>
-                                <div><span>🍽️</span> 25 servings</div>
-                            </div>
-                            <div class="food-meta">
-                                <div><span>📍</span> 3.1 km away</div>
-                                <div><span>❄️</span> Refrigerated</div>
-                            </div>
-                            <div class="food-actions">
-                                <button class="btn btn-primary" onclick="openRequestModal()">Request Pickup</button>
-                                <button class="btn btn-secondary">More Info</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Food Card 5 -->
-                    <div class="food-card">
-                        <div class="food-image" style="background-image: url('/api/placeholder/400/320')"></div>
-                        <div class="food-details">
-                            <div class="food-title">Sandwich Platter</div>
-                            <div class="restaurant-name">Downtown Deli</div>
-                            <div class="food-meta">
-                                <div><span>🕒</span> Expires in 5 hrs</div>
-                                <div><span>🍽️</span> 18 servings</div>
-                            </div>
-                            <div class="food-meta">
-                                <div><span>📍</span> 1.7 km away</div>
-                                <div><span>❄️</span> Refrigerated</div>
-                            </div>
-                            <div class="food-actions">
-                                <button class="btn btn-primary" onclick="openRequestModal()">Request Pickup</button>
-                                <button class="btn btn-secondary">More Info</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Food Card 6 -->
-                    <div class="food-card">
-                        <div class="food-image" style="background-image: url('/api/placeholder/400/320')"></div>
-                        <div class="food-details">
-                            <div class="food-title">Rice & Curry Trays</div>
-                            <div class="restaurant-name">Spice House</div>
-                            <div class="food-meta">
-                                <div><span>🕒</span> Expires in 3 hrs</div>
-                                <div><span>🍽️</span> 30 servings</div>
-                            </div>
-                            <div class="food-meta">
-                                <div><span>📍</span> 2.5 km away</div>
-                                <div><span>🔥</span> Hot food</div>
-                            </div>
-                            <div class="food-actions">
-                                <button class="btn btn-primary" onclick="openRequestModal()">Request Pickup</button>
-                                <button class="btn btn-secondary">More Info</button>
-                            </div>
-                        </div>
-                    </div>
+    <!-- Pickup Details Modal -->
+    <div id="pickup-details-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Pickup Details</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="pickup-details-content">
+                    <!-- Will be filled with JavaScript -->
                 </div>
             </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary modal-close-btn">Close</button>
+            </div>
+        </div>
+    </div>
 
-            <!-- Track Requested Donations Tab -->
-            <div class="tab-pane tracking-tab" id="tracking-tab" style="display: none;">
-                <!-- Tracking Item 1 -->
-                <div class="tracking-item">
-                    <div class="tracking-header">
-                        <div class="tracking-title">Mixed Pasta Trays</div>
-                        <div class="tracking-status status-pending">Pending</div>
-                    </div>
-                    <div class="tracking-details">
-                        <div class="tracking-detail">
-                            <div class="tracking-detail-label">Restaurant</div>
-                            <div class="tracking-detail-value">Italian Bistro</div>
-                        </div>
-                        <div class="tracking-detail">
-                            <div class="tracking-detail-label">Servings</div>
-                            <div class="tracking-detail-value">20</div>
-                        </div>
-                        <div class="tracking-detail">
-                            <div class="tracking-detail-label">Request Date</div>
-                            <div class="tracking-detail-value">Apr 3, 2025 11:30 AM</div>
-                        </div>
-                        <div class="tracking-detail">
-                            <div class="tracking-detail-label">Expected Pickup</div>
-                            <div class="tracking-detail-value">Apr 3, 2025 2:00 PM</div>
+    <!-- Rating Modal -->
+    <div id="rating-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Rate Donation</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="rating-form">
+                    <div class="form-group">
+                        <label class="form-label">Food Quality</label>
+                        <div class="ratings rating-input" id="food-quality-rating">
+                            <span class="rating" data-value="1">★</span>
+                            <span class="rating" data-value="2">★</span>
+                            <span class="rating" data-value="3">★</span>
+                            <span class="rating" data-value="4">★</span>
+                            <span class="rating" data-value="5">★</span>
                         </div>
                     </div>
-                    <div class="timeline">
-                        <div class="timeline-step">
-                            <div class="step-icon step-completed">✓</div>
-                            <div class="step-label">Request Sent</div>
-                        </div>
-                        <div class="timeline-step">
-                            <div class="step-icon step-current">2</div>
-                            <div class="step-label">Restaurant Confirms</div>
-                        </div>
-                        <div class="timeline-step">
-                            <div class="step-icon">3</div>
-                            <div class="step-label">Ready for Pickup</div>
-                        </div>
-                        <div class="timeline-step">
-                            <div class="step-icon">4</div>
-                            <div class="step-label">Picked Up</div>
-                        </div>
-                        <div class="timeline-step">
-                            <div class="step-icon">5</div>
-                            <div class="step-label">Completed</div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Packaging</label>
+                        <div class="ratings rating-input" id="packaging-rating">
+                            <span class="rating" data-value="1">★</span>
+                            <span class="rating" data-value="2">★</span>
+                            <span class="rating" data-value="3">★</span>
+                            <span class="rating" data-value="4">★</span>
+                            <span class="rating" data-value="5">★</span>
                         </div>
                     </div>
-                </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Quantity Accuracy</label>
+                        <div class="ratings rating-input" id="quantity-rating">
+                            <span class="rating" data-value="1">★</span>
+                            <span class="rating" data-value="2">★</span>
+                            <span class="rating" data-value="3">★</span>
+                            <span class="rating" data-value="4">★</span>
+                            <span class="rating" data-value="5">★</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Comments</label>
+                        <textarea class="form-control" id="rating-comments" placeholder="Share your experience with this donation"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary modal-close-btn">Cancel</button>
+                <button class="btn btn-primary" id="submit-rating-btn">Submit Rating</button>
+            </div>
+        </div>
+    </div>
 
-                <!-- Tracking Item 2 -->
-                <div class="tracking-item">
-                    <div class="tracking-header">
-                        <div class="tracking-title">Fresh Baked Bread & Pastries</div>
-                        <div class="tracking-status status-approved">Ready for Pickup</div>
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2025 CarePlate - Bridging the gap between surplus food and those in need.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current date
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('current-date').textContent = now.toLocaleDateString('en-US', options);
+            
+            // Tab switching functionality
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Hide all tab contents
+                    const tabContents = document.querySelectorAll('.tab-content');
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Show the corresponding tab content
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId + '-tab').classList.add('active');
+                });
+            });
+            
+            // Modal functionality
+            const modals = document.querySelectorAll('.modal');
+            const modalCloseButtons = document.querySelectorAll('.modal-close, .modal-close-btn');
+            
+            modalCloseButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    modals.forEach(modal => modal.classList.remove('active'));
+                });
+            });
+            
+            // Food Details Modal
+            const viewDetailsButtons = document.querySelectorAll('.view-details-btn');
+            const foodDetailsModal = document.getElementById('food-details-modal');
+            const foodDetailsContent = document.getElementById('food-details-content');
+            
+            viewDetailsButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const foodId = this.getAttribute('data-id');
+                    loadFoodDetails(foodId);
+                    foodDetailsModal.classList.add('active');
+                });
+            });
+            
+            // Pickup Details Modal
+            const viewPickupButtons = document.querySelectorAll('.view-pickup-btn');
+            const pickupDetailsModal = document.getElementById('pickup-details-modal');
+            const pickupDetailsContent = document.getElementById('pickup-details-content');
+            
+            viewPickupButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const pickupId = this.getAttribute('data-id');
+                    loadPickupDetails(pickupId);
+                    pickupDetailsModal.classList.add('active');
+                });
+            });
+            
+            // Rating Modal
+            const rateButtons = document.querySelectorAll('.rate-btn');
+            const ratingModal = document.getElementById('rating-modal');
+            
+            rateButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const donationId = this.getAttribute('data-id');
+                    loadDonationForRating(donationId);
+                    ratingModal.classList.add('active');
+                });
+            });
+            
+            // Star Rating Functionality
+            const ratingInputs = document.querySelectorAll('.rating-input');
+            
+            ratingInputs.forEach(ratingInput => {
+                const stars = ratingInput.querySelectorAll('.rating');
+                
+                stars.forEach(star => {
+                    star.addEventListener('click', function() {
+                        const value = this.getAttribute('data-value');
+                        
+                        // Reset all stars
+                        stars.forEach(s => s.classList.remove('empty'));
+                        
+                        // Fill stars up to the selected one
+                        stars.forEach(s => {
+                            if (s.getAttribute('data-value') > value) {
+                                s.classList.add('empty');
+                            }
+                        });
+                    });
+                });
+            });
+            
+            // Form submissions
+            const pickupForm = document.getElementById('pickup-form');
+            
+            pickupForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Show success message
+                const successAlert = document.createElement('div');
+                successAlert.className = 'alert alert-success';
+                successAlert.innerHTML = '<p><strong>Success!</strong> Your pickup request has been submitted. You will receive a confirmation from the restaurant shortly.</p>';
+                
+                pickupForm.parentNode.insertBefore(successAlert, pickupForm);
+                
+                // Reset form
+                pickupForm.reset();
+                
+                // Remove alert after 5 seconds
+                setTimeout(() => {
+                    successAlert.remove();
+                }, 5000);
+            });
+            
+            const submitRatingBtn = document.getElementById('submit-rating-btn');
+            
+            submitRatingBtn.addEventListener('click', function() {
+                // Close modal
+                ratingModal.classList.remove('active');
+                
+                // Show success message in the feedback tab
+                const successAlert = document.createElement('div');
+                successAlert.className = 'alert alert-success';
+                successAlert.innerHTML = '<p><strong>Thank you!</strong> Your feedback has been submitted successfully.</p>';
+                
+                const feedbackTab = document.getElementById('feedback-tab');
+                feedbackTab.insertBefore(successAlert, feedbackTab.firstChild);
+                
+                // Remove alert after 5 seconds
+                setTimeout(() => {
+                    successAlert.remove();
+                }, 5000);
+            });
+            
+            // Request Pickup from Modal
+            const requestPickupModalBtn = document.querySelector('.request-pickup-modal-btn');
+            
+            requestPickupModalBtn.addEventListener('click', function() {
+                // Close details modal
+                foodDetailsModal.classList.remove('active');
+                
+                // Switch to request tab
+                tabs.forEach(t => t.classList.remove('active'));
+                document.querySelector('[data-tab="request"]').classList.add('active');
+                
+                const tabContents = document.querySelectorAll('.tab-content');
+                tabContents.forEach(content => content.classList.remove('active'));
+                document.getElementById('request-tab').classList.add('active');
+                
+                // Scroll to form
+                document.getElementById('pickup-form').scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // Direct Request Pickup buttons
+            const requestButtons = document.querySelectorAll('.request-btn');
+            
+            requestButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const foodId = this.getAttribute('data-id');
+                    
+                    // Switch to request tab
+                    tabs.forEach(t => t.classList.remove('active'));
+                    document.querySelector('[data-tab="request"]').classList.add('active');
+                    
+                    const tabContents = document.querySelectorAll('.tab-content');
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    document.getElementById('request-tab').classList.add('active');
+                    
+                    // Set the food item in the dropdown
+                    document.getElementById('food-item').value = foodId;
+                    
+                    // Scroll to form
+                    document.getElementById('pickup-form').scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+            
+            // Mock data loading functions
+            function loadFoodDetails(foodId) {
+                // In a real application, this would fetch data from an API
+                const foodDetails = {
+                    1: {
+                        title: "Italian Pasta & Garlic Bread",
+                        restaurant: "La Trattoria",
+                        address: "123 Main St, Downtown",
+                        phone: "(555) 123-4567",
+                        description: "Freshly made pasta with tomato sauce and 20 pieces of garlic bread. Enough for 10-15 people.",
+                        quantity: "5 kg",
+                        expiry: "Today at 9:00 PM",
+                        instructions: "Please bring your own containers for the pasta sauce.",
+                        allergens: "Contains gluten, dairy",
+                        image: "/api/placeholder/400/250"
+                    },
+                    // Additional food items would be defined here
+                };
+                
+                const details = foodDetails[foodId] || foodDetails[1]; // Default to the first item if not found
+                
+                foodDetailsContent.innerHTML = `
+                    <img src="${details.image}" alt="${details.title}" style="width:100%; border-radius:8px; margin-bottom:15px;">
+                    <h3>${details.title}</h3>
+                    <p><strong>Restaurant:</strong> ${details.restaurant}</p>
+                    <p><strong>Address:</strong> ${details.address}</p>
+                    <p><strong>Phone:</strong> ${details.phone}</p>
+                    <p><strong>Description:</strong> ${details.description}</p>
+                    <p><strong>Quantity:</strong> ${details.quantity}</p>
+                    <p><strong>Available Until:</strong> ${details.expiry}</p>
+                    <p><strong>Special Instructions:</strong> ${details.instructions}</p>
+                    <p><strong>Allergens:</strong> ${details.allergens}</p>
+                    
+                    <div class="alert alert-info" style="margin-top:15px;">
+                        <p>This food can serve approximately 10-15 people and needs to be picked up before the expiry time.</p>
                     </div>
-                    <div class="tracking-details">
-                        <div class="tracking-detail">
-                            <div class="tracking-detail-label">Restaurant</div>
-                            <div class="tracking-detail-value">Morning Bakery</div>
-                        </div>
-                        <div class="tracking-detail">
-                            <div class="tracking-detail-label">Servings</div>
-                            <div class="tracking-detail-value">40</div>
-                        </div>
-                        <div class="tracking-detail">
-                            <div class="tracking-detail-label">Request Date</div>
-                            <div class="tracking-detail-value">Apr 2, 2025 9:30 AM</div>
-                        </div>
-                        <div class="tracking-detail">
-                            <div class="tracking-detail-label">Expected Pickup</div>
-                            <div class="tracking-
+                `;
+            }
+            
+            function loadPickupDetails(pickupId) {
+                // In a real application, this would fetch data from an API
+                const pickupDetails = {
+                    4582: {
+                        id: "#4582",
+                        food: "Vegetable Biryani & Raita",
+                        restaurant: "Spice Garden",
+                        address: "456 Spice Ave, Midtown",
+                        phone: "(555) 987-6543",
+                        requestDate: "Apr 3, 2025",
+                        pickupTime: "Apr 3, 2025, 4:00 PM",
+                        status: "Confirmed",
+                        statusClass: "status-confirmed",
+                        beneficiaries: "20",
+                        notes: "Please have someone available to help with loading.",
+                        image: "/api/placeholder/400/250"
+                    },
+                    // Additional pickup items would be defined here
+                };
+                
+                const details = pickupDetails[pickupId] || pickupDetails[4582]; // Default to the first item if not found
+                
+                pickupDetailsContent.innerHTML = `
+                    <img src="${details.image}" alt="${details.food}" style="width:100%; border-radius:8px; margin-bottom:15px;">
+                    <h3>${details.food}</h3>
+                    <p><strong>Pickup ID:</strong> ${details.id}</p>
+                    <p><strong>Restaurant:</strong> ${details.restaurant}</p>
+                    <p><strong>Address:</strong> ${details.address}</p>
+                    <p><strong>Phone:</strong> ${details.phone}</p>
+                    <p><strong>Request Date:</strong> ${details.requestDate}</p>
+                    <p><strong>Pickup Time:</strong> ${details.pickupTime}</p>
+                    <p><strong>Status:</strong> <span class="status ${details.statusClass}">${details.status}</span></p>
+                    <p><strong>Beneficiaries:</strong> ~${details.beneficiaries} people</p>
+                    <p><strong>Notes:</strong> ${details.notes}</p>
+                    
+                    <div class="alert alert-info" style="margin-top:15px;">
+                        <p>Restaurant confirmation has been received. Please arrive on time for pickup.</p>
+                    </div>
+                `;
+            }
+            
+            function loadDonationForRating(donationId) {
+                // This function would pre-fill the rating modal based on existing ratings
+                // In a real application, this would fetch data from an API
+                
+                // For this demo, we'll just reset the form
+                const ratingInputs = document.querySelectorAll('.rating-input');
+                
+                ratingInputs.forEach(ratingInput => {
+                    const stars = ratingInput.querySelectorAll('.rating');
+                    
+                    // Reset all stars (remove 'empty' class)
+                    stars.forEach(s => s.classList.remove('empty'));
+                    
+                    // Set a default rating (e.g., 4 stars)
+                    stars.forEach(s => {
+                        if (s.getAttribute('data-value') > 4) {
+                            s.classList.add('empty');
+                        }
+                    });
+                });
+                
+                document.getElementById('rating-comments').value = '';
+            }
+        });
+    </script>
+</body>
+</html>
