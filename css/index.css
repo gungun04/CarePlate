@@ -9,7 +9,7 @@
     --primary: #4CAF50;
     --primary-dark: #388E3C;
     --accent: #FF9800;
-    --light: #F5F5F5;
+    --light: white;
     --dark: #333333;
 }
 
@@ -23,7 +23,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: white;
+    background-color: #4CAF50;
     padding: 1rem 5%;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     position: fixed;
@@ -37,7 +37,7 @@ body {
     align-items: center;
     gap: 10px;
     text-decoration: none;
-    color: var(--dark);
+    color: white;
 }
 
 .logo span {
@@ -46,7 +46,7 @@ body {
 }
 
 .logo-highlight {
-    color: var(--primary);
+    color: white;
 }
 
 .nav-links {
@@ -56,13 +56,13 @@ body {
 
 .nav-links a {
     text-decoration: none;
-    color: var(--dark);
+    color: var(--light);
     font-weight: 500;
     transition: color 0.3s;
 }
 
 .nav-links a:hover {
-    color: var(--primary);
+    color: var(--accent);
 }
 
 .btn {
@@ -98,7 +98,7 @@ body {
     display: flex;
     align-items: center;
     padding: 0 5%;
-    background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('/api/placeholder/1200/800') center/cover;
+    background:  url('/images/lady17.png') center/cover;
     margin-top: 60px;
 }
 

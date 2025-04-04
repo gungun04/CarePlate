@@ -64,17 +64,14 @@ nav {
 }
 
 .nav-links a:hover {
-    color: #f1f1f1;
+    color: #FF9800;
 }
 
-.active {
-    border-bottom: 2px solid white;
-}
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("/api/placeholder/1200/400") center/cover no-repeat;
-    color: white;
+    background: linear-gradient(rgba(72, 237, 83, 0.6), rgba(245, 182, 88, 0.6)), center/cover no-repeat;
+    color: rgb(15, 135, 15);
     text-align: center;
     padding: 100px 20px;
 }

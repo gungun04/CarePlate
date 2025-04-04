@@ -1,6 +1,6 @@
 :root {
-    --primary: #2E7D32;
-    --secondary: #4CAF50;
+    --primary: #4CAF50;
+    --secondary: #2E7D32;
     --light: #E8F5E9;
     --dark: #1B5E20;
     --accent: #FF9800;
@@ -41,7 +41,7 @@
   }
   
   .logo span {
-    color: var(--accent);
+    color: white;
   }
   
   .nav-links {
@@ -64,13 +64,13 @@
   }
   
   .hero {
-    background-color: var(--light);
+    background: linear-gradient(rgba(72, 237, 83, 0.6), rgba(245, 182, 88, 0.6)), center/cover no-repeat;
     padding: 3rem 5%;
     text-align: center;
   }
   
   .hero h1 {
-    color: var(--dark);
+    color: rgb(15, 135, 15);
     margin-bottom: 1rem;
     font-size: 2.5rem;
   }
