@@ -4,728 +4,178 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - CarePlate</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: #f8f9fa;
-            color: #333;
-            line-height: 1.6;
-        }
-        
-        /* Navbar styles (same as previous artifact) */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #4CAF50;
-            padding: 1rem 2rem;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-        
-        .logo img {
-            height: 40px;
-            margin-right: 10px;
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-        
-        .nav-links li {
-            margin-left: 1.5rem;
-        }
-        
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            transition: background-color 0.3s;
-        }
-        
-        .nav-links a:hover {
-            background-color: rgba(255,255,255,0.2);
-        }
-        
-        .nav-links a.active {
-            background-color: rgba(255,255,255,0.3);
-        }
-        
-        .auth-buttons {
-            display: flex;
-            align-items: center;
-        }
-        
-        .login-btn, .signup-btn {
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 500;
-            margin-left: 1rem;
-        }
-        
-        .login-btn {
-            color: #4CAF50;
-            background-color: white;
-        }
-        
-        .signup-btn {
-            color: white;
-            background-color: #FF5722;
-            border: none;
-        }
-        
-        /* About page specific styles */
-        .hero {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/api/placeholder/1200/400');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            text-align: center;
-            padding: 5rem 1rem;
-        }
-        
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-        
-        .section {
-            padding: 3rem 0;
-            border-bottom: 1px solid #e9ecef;
-        }
-        
-        .section:last-child {
-            border-bottom: none;
-        }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .section-header h2 {
-            color: #4CAF50;
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .section-header p {
-            color: #6c757d;
-            font-size: 1.1rem;
-        }
-        
-        .mission-vision {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            justify-content: center;
-        }
-        
-        .card {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            padding: 2rem;
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .card h3 {
-            color: #4CAF50;
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-        
-        .stats {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            margin: 2rem 0;
-            text-align: center;
-        }
-        
-        .stat-item {
-            padding: 1rem;
-        }
-        
-        .stat-number {
-            font-size: 2.5rem;
-            color: #FF5722;
-            font-weight: bold;
-        }
-        
-        .stat-label {
-            color: #6c757d;
-        }
-        
-        .how-it-works {
-            margin: 3rem 0;
-        }
-        
-        .step-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            justify-content: center;
-            margin-top: 2rem;
-        }
-        
-        .step {
-            flex: 1;
-            min-width: 250px;
-            text-align: center;
-            padding: 1.5rem;
-        }
-        
-        .step-icon {
-            width: 80px;
-            height: 80px;
-            background-color: #e8f5e9;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1rem;
-            color: #4CAF50;
-            font-size: 2rem;
-            font-weight: bold;
-        }
-        
-        .step h3 {
-            margin-bottom: 1rem;
-            color: #4CAF50;
-        }
-    </style>
+    <link rel="stylesheet" href="css/about.css">
 </head>
 <body>
-    <!-- Navbar (same as previous artifact) -->
-    <nav class="navbar">
-        <div class="logo">
-            <img src="/api/placeholder/40/40" alt="CarePlate Logo">
-            CarePlate
-        </div>
-        
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html" class="active">About Us</a></li>
-            <li><a href="restaurants.html">For Restaurants</a></li>
-            <li><a href="ngos.html">For NGOs</a></li>
-            <li><a href="impact.html">Our Impact</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-        
-        <div class="auth-buttons">
-            <a href="login.html" class="login-btn">Login</a>
-            <a href="signup.html" class="signup-btn">Sign Up</a>
+    <!-- Navbar -->
+    <nav>
+        <div class="container navbar">
+            <a href="#" class="logo">
+                <span class="logo-icon">🍽️</span> CarePlate
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#" class="active">About Us</a></li>
+                <li><a href="restaurant-interface.html">For Restaurants</a></li>
+                <li><a href="ngo-interface.html">For NGOs</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#">Login</a></li>
+            </ul>
         </div>
     </nav>
-    
+
     <!-- Hero Section -->
     <div class="hero">
-        <h1>About CarePlate</h1>
-        <p>Bridging the gap between surplus food and those in need</p>
+        <div class="container">
+            <h1>About CarePlate</h1>
+            <p>Bridging the gap between surplus food and hungry people, one plate at a time.</p>
+        </div>
     </div>
-    
-    <div class="container">
-        <!-- Mission & Vision Section -->
-        <div class="section">
-            <div class="section-header">
+
+    <!-- Mission & Vision Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
                 <h2>Mission & Vision</h2>
-                <p>What drives us forward every day</p>
             </div>
-            
             <div class="mission-vision">
-                <div class="card">
+                <div class="mission">
                     <h3>Our Mission</h3>
-                    <p>CarePlate is on a mission to reduce food waste while addressing hunger by creating an efficient and sustainable connection between restaurants with surplus food and organizations serving those in need.</p>
-                    <p>We believe that good food should never go to waste when there are people who could benefit from it. Our platform provides the technology and logistics to make food sharing simple, safe, and impactful.</p>
+                    <p>CarePlate is on a mission to eliminate food waste while addressing hunger in communities worldwide. We connect restaurants with surplus food to NGOs that support those in need, creating an efficient redistribution system that benefits both people and the planet.</p>
+                    <p>We believe that no good food should go to waste when there are people who could benefit from it. Our platform facilitates these connections to create a more sustainable and equitable food system.</p>
                 </div>
-                
-                <div class="card">
+                <div class="vision">
                     <h3>Our Vision</h3>
-                    <p>We envision a world where no edible food goes to waste, where restaurants are empowered to make a positive social impact, and where everyone has access to nutritious meals regardless of their economic situation.</p>
-                    <p>By 2030, we aim to reduce food waste from participating restaurants by 75% while providing millions of meals to those experiencing food insecurity.</p>
-                </div>
-            </div>
-            
-            <div class="stats">
-                <div class="stat-item">
-                    <div class="stat-number">500+</div>
-                    <div class="stat-label">Participating Restaurants</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">250+</div>
-                    <div class="stat-label">Partner NGOs</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">100,000+</div>
-                    <div class="stat-label">Meals Saved</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">45</div>
-                    <div class="stat-label">Cities Covered</div>
+                    <p>We envision a world where surplus food is consistently redirected to those who need it most, where restaurants minimize their environmental footprint, and where communities come together to solve the dual problems of food waste and hunger.</p>
+                    <p>By 2030, we aim to help save 10 million meals annually from being wasted and redirect them to people facing food insecurity across 100 cities worldwide.</p>
                 </div>
             </div>
         </div>
-        
-        <!-- How It Works Section -->
-        <div class="section">
-            <div class="section-header">
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
                 <h2>How The Platform Works</h2>
-                <p>A simple process with tremendous impact</p>
             </div>
-            
-            <div class="step-container">
-                <div class="step">
-                    <div class="step-icon">1</div>
-                    <h3>Registration</h3>
-                    <p>Restaurants and NGOs create accounts and complete their profiles including location, capacity, and schedules.</p>
-                </div>
-                
-                <div class="step">
-                    <div class="step-icon">2</div>
-                    <h3>Food Listing</h3>
-                    <p>Restaurants log surplus food with details on quantity, type, pickup time, and any dietary information.</p>
-                </div>
-                
-                <div class="step">
-                    <div class="step-icon">3</div>
-                    <h3>Matching</h3>
-                    <p>Our system automatically matches available food with nearby NGOs based on their needs and capacity.</p>
-                </div>
-                
-                <div class="step">
-                    <div class="step-icon">4</div>
-                    <h3>Pickup & Delivery</h3>
-                    <p>NGOs receive notifications and confirm pickups, or request delivery assistance when available.</p>
-                </div>
-            </div>
-            
             <div class="how-it-works">
-                <h3>Platform Features</h3>
-                <ul>
-                    <li><strong>Real-time Notifications:</strong> Instant alerts to NGOs when matching food becomes available</li>
-                    <li><strong>Location-based Matching:</strong> Intelligent pairing based on proximity to ensure food freshness</li>
-                    <li><strong>Impact Tracking:</strong> Detailed metrics on meals saved, carbon footprint reduced, and people served</li>
-                    <li><strong>Food Safety Guidelines:</strong> Comprehensive protocols to ensure all food meets safety standards</li>
-                    <li><strong>Feedback System:</strong> Two-way rating system to maintain quality and reliability</li>
-                </ul>
+                <p>CarePlate provides a seamless connection between food donors and recipients through an intuitive platform designed for efficiency and impact.</p>
+                
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-icon">📝</div>
+                        <h3>Registration</h3>
+                        <p>Restaurants and NGOs create profiles with their operational details, location, capacity, and preferences to ensure optimal matching.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">🍲</div>
+                        <h3>Food Listing</h3>
+                        <p>Restaurants log their surplus food, including quantity, type, preparation time, and pickup window, ensuring all safety guidelines are met.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">🔔</div>
+                        <h3>Matching & Notifications</h3>
+                        <p>NGOs receive real-time alerts about available food in their vicinity, with details on quantity and pickup timing.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">✅</div>
+                        <h3>Claim & Pickup</h3>
+                        <p>NGOs claim food donations through the platform, arranging for pickup or delivery based on mutual convenience.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">📊</div>
+                        <h3>Tracking & Impact</h3>
+                        <p>Both parties confirm successful transfers, while our system tracks environmental impact and meals served to highlight collective accomplishments.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">⭐</div>
+                        <h3>Rating & Feedback</h3>
+                        <p>Partners rate each other to maintain quality standards and build a trusted community committed to our shared mission.</p>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Success Stories Section -->
+    <section class="section success-stories">
+        <div class="container">
+            <div class="section-title">
+                <h2>Success Stories</h2>
+            </div>
+            <div class="stories">
+                <div class="story">
+                    <div class="story-img" style="background-image: url('/api/placeholder/600/400')"></div>
+                    <div class="story-content">
+                        <h3>From Surplus to Support: The Fresh Start Bistro Story</h3>
+                        <p class="story-meta">New York City, USA | 2,500+ meals donated</p>
+                        <p>Fresh Start Bistro was throwing away quality food every night until they joined CarePlate. Now, they redirect over 100 meals weekly to Hope Community Center, feeding families while reducing their waste disposal costs by 30% and boosting staff morale.</p>
+                        <p>"CarePlate transformed our waste problem into a community solution. Our team is proud to make a difference with every meal saved." - Mark Chen, Owner</p>
+                    </div>
+                </div>
+                <div class="story">
+                    <div class="story-img" style="background-image: url('/api/placeholder/600/400')"></div>
+                    <div class="story-content">
+                        <h3>Feeding the Neighborhood: Sunshine NGO's Journey</h3>
+                        <p class="story-meta">Chicago, IL | Serving 500+ people weekly</p>
+                        <p>Sunshine NGO struggled with inconsistent food donations until discovering CarePlate. They now receive scheduled surplus food from 15 local restaurants, allowing them to plan meals for homeless shelters consistently and expand their services to vulnerable seniors.</p>
+                        <p>"The reliability of CarePlate's system has allowed us to increase our beneficiaries by 40% this year alone." - Sophia Rodriguez, Director</p>
+                    </div>
+                </div>
+                <div class="story">
+                    <div class="story-img" style="background-image: url('/api/placeholder/600/400')"></div>
+                    <div class="story-content">
+                        <h3>A City-Wide Movement: The Austin Food Rescue Initiative</h3>
+                        <p class="story-meta">Austin, TX | 75,000+ lbs of food rescued</p>
+                        <p>When CarePlate launched in Austin, 20 restaurants signed up in the first month. A year later, over 100 food businesses and 30 local NGOs have joined, creating a citywide network that has redirected 75,000 pounds of food. The initiative has prevented approximately 34 metric tons of CO2 emissions from food waste.</p>
+                        <p>"CarePlate has created an ecosystem of giving that's transforming how our city thinks about food waste." - Mayor's Office, Austin</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>CarePlate</h4>
+                    <p>Connecting surplus food with those who need it most, creating a more sustainable and caring world.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">For Restaurants</a></li>
+                        <li><a href="#">For NGOs</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-links">
+                        <li>Email: info@careplate.org</li>
+                        <li>Phone: +1 (555) 123-4567</li>
+                        <li>Address: 123 Impact Street, Social Innovation Hub, NY 10001</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow Us</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 CarePlate. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - Success Stories - CarePlate</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: #f8f9fa;
-            color: #333;
-            line-height: 1.6;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-        
-        .section {
-            padding: 3rem 0;
-        }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .section-header h2 {
-            color: #4CAF50;
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .section-header p {
-            color: #6c757d;
-            font-size: 1.1rem;
-        }
-        
-        /* Success Stories Styles */
-        .success-stories {
-            margin-top: 2rem;
-        }
-        
-        .story {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        @media (min-width: 768px) {
-            .story {
-                flex-direction: row;
-            }
-            
-            .story:nth-child(even) {
-                flex-direction: row-reverse;
-            }
-        }
-        
-        .story-image {
-            flex: 1;
-            min-height: 300px;
-            background-size: cover;
-            background-position: center;
-        }
-        
-        .story-content {
-            flex: 1;
-            padding: 2rem;
-        }
-        
-        .story-content h3 {
-            color: #4CAF50;
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-        
-        .story-meta {
-            display: flex;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            color: #6c757d;
-        }
-        
-        .story-meta div {
-            margin-right: 1.5rem;
-            display: flex;
-            align-items: center;
-        }
-        
-        .story-meta svg {
-            margin-right: 0.5rem;
-        }
-        
-        .quote {
-            font-style: italic;
-            border-left: 4px solid #4CAF50;
-            padding-left: 1rem;
-            margin: 1.5rem 0;
-            color: #555;
-        }
-        
-        .cta {
-            text-align: center;
-            margin: 3rem 0;
-        }
-        
-        .cta-button {
-            display: inline-block;
-            background-color: #FF5722;
-            color: white;
-            padding: 0.8rem 2rem;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-        
-        .cta-button:hover {
-            background-color: #e64a19;
-        }
-        
-        .partners {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-        
-        .partner {
-            width: 150px;
-            height: 100px;
-            background-color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .testimonials {
-            margin-top: 3rem;
-        }
-        
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .testimonial {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            padding: 1.5rem;
-        }
-        
-        .testimonial-content {
-            font-style: italic;
-            margin-bottom: 1rem;
-        }
-        
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-        }
-        
-        .author-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: #e9ecef;
-            margin-right: 1rem;
-            overflow: hidden;
-        }
-        
-        .author-info h4 {
-            margin: 0;
-            color: #4CAF50;
-        }
-        
-        .author-info p {
-            margin: 0;
-            color: #6c757d;
-            font-size: 0.9rem;
-        }
-        
-        footer {
-            background-color: #333;
-            color: white;
-            padding: 3rem 0;
-            margin-top: 3rem;
-        }
-        
-        .footer-content {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-        
-        .footer-column {
-            flex: 1;
-            min-width: 200px;
-            margin-bottom: 2rem;
-        }
-        
-        .footer-column h3 {
-            margin-bottom: 1rem;
-            color: #4CAF50;
-        }
-        
-        .footer-column ul {
-            list-style: none;
-        }
-        
-        .footer-column ul li {
-            margin-bottom: 0.5rem;
-        }
-        
-        .footer-column a {
-            color: #ccc;
-            text-decoration: none;
-        }
-        
-        .footer-column a:hover {
-            color: white;
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-        
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: #555;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-decoration: none;
-            transition: background-color 0.3s;
-        }
-        
-        .social-links a:hover {
-            background-color: #4CAF50;
-        }
-        
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            margin-top: 2rem;
-            border-top: 1px solid #555;
-            color: #aaa;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <!-- Success Stories Section -->
-        <div class="section">
-            <div class="section-header">
-                <h2>Success Stories</h2>
-                <p>Real impact made possible through collaboration</p>
-            </div>
-            
-            <div class="success-stories">
-                <div class="story">
-                    <div class="story-image" style="background-image: url('/api/placeholder/600/400');"></div>
-                    <div class="story-content">
-                        <h3>Fresh Start Community Kitchen</h3>
-                        <div class="story-meta">
-                            <div>
-                                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                </svg>
-                                Chicago, IL
-                            </div>
-                            <div>
-                                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                </svg>
-                                Since 2023
-                            </div>
-                        </div>
-                        
-                        <p>Fresh Start Community Kitchen serves over 200 meals daily to homeless and low-income individuals. Before joining CarePlate, they often struggled with consistent food sources and quality.</p>
-                        
-                        <p>Since partnering with CarePlate, they've been able to receive high-quality food from 15 local restaurants, increasing their meal capacity by 40% while significantly improving meal variety and nutritional value.</p>
-                        
-                        <div class="quote">
-                            "CarePlate has transformed our operation. We now serve more nutritious meals with greater variety, and our community members often comment on how much better the food has become. The platform's reliability means we can plan better and focus on other aspects of service."
-                        </div>
-                        
-                        <p><strong>Impact:</strong> 15,000+ meals served, $25,000 in food costs saved, and a 30% increase in regular attendees.</p>
-                    </div>
-                </div>
-                
-                <div class="story">
-                    <div class="story-image" style="background-image: url('/api/placeholder/600/400');"></div>
-                    <div class="story-content">
-                        <h3>Green Table Restaurant Group</h3>
-                        <div class="story-meta">
-                            <div>
-                                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                </svg>
-                                Boston, MA
-                            </div>
-                            <div>
-                                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                </svg>
-                                Since 2022
-                            </div>
-                        </div>
-                        
-                        <p>Green Table Restaurant Group operates five popular farm-to-table restaurants across Boston. Despite their best efforts to minimize waste, they found themselves discarding significant amounts of high-quality food at the end of each day.</p>
-                        
-                        <p>After joining CarePlate, they've been able to redirect nearly 90% of their surplus food to local shelters and community centers, dramatically reducing their environmental impact while making a positive difference in their community.</p>
-                        
-                        <div class="quote">
-                            "As a business focused on sustainability, finding CarePlate was a game-changer. Our staff morale has improved knowing our food isn't wasted, and we've actually seen an increase in customer loyalty as we share our impact metrics. It's a win-win situation that aligns perfectly with our values."
-                        </div>
-                        
-                        <p><strong>Impact:</strong> 8 tons of food rescued, 65% reduction in food waste costs, and a feature in Local Business Magazine's "Sustainability Leaders" issue.</p>
-                    </div>
-                </div>
-                
-                <div class="story">
-                    <div class="story-image" style="background-image: url('/api/placeholder/600/400');"></div>
-                    <div class="story-content">
-                        <h3>University Food Recovery Network</h3>
-                        <div class="story-meta">
-                            <div>
-                                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15
