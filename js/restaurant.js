@@ -163,7 +163,9 @@ const donationChart = new Chart(ctx, {
         }
     }
 });
-ion() {
+
+// Set current date as default min date for expiry
+document.addEventListener('DOMContentLoaded', function() {
     const today = new Date().toISOString().split('T')[0];
     document.getElementById('expiry').min = today;
 });
