@@ -193,7 +193,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 expiry: "Today at 9:00 PM",
                 instructions: "Please bring your own containers for the pasta sauce.",
                 allergens: "Contains gluten, dairy",
-                image: "/api/placeholder/400/250"
+                image: "images/pasta.jpeg"
+            },
+            2: {
+                title: "Mixed Sandwich Platter",
+                restaurant: "Sandwich Corner",
+                address: "123 Main St, Downtown",
+                phone: "(555) 123-4567",
+                description: "Assorted sandwich platter with vegetarian and non-vegetarian options. 25 sandwich halves.",
+                quantity: "3 kg",
+                expiry: "Today at 9:00 PM",
+                allergens: "Contains gluten, dairy",
+                image: "images/sandwich-4638226_1280.jpg"
             },
             // Additional food items would be defined here
         };
