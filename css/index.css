@@ -111,7 +111,10 @@ body {
 }
 
 
+<<<<<<< Updated upstream
 /* Hero Section */
+=======
+>>>>>>> Stashed changes
 .hero {
     height: 100vh;
     display: flex;
@@ -141,7 +144,6 @@ body {
     gap: 1rem;
 }
 
-/* Features Section */
 .features {
     padding: 5rem 5%;
     text-align: center;
@@ -191,7 +193,6 @@ body {
     margin-bottom: 1rem;
 }
 
-/* How It Works */
 .how-it-works {
     padding: 5rem 5%;
     background-color: var(--light);
@@ -233,7 +234,7 @@ body {
     align-self: center;
 }
 
-/* Footer */
+
 footer {
     background-color: var(--dark);
     color: white;
@@ -287,7 +288,7 @@ footer {
     border-top: 1px solid #555;
 }
 
-/* Modal */
+
 .modal {
     display: none;
     position: fixed;
@@ -328,7 +329,7 @@ footer {
     color: var(--dark);
 }
 
-/* Form Styles */
+
 .form-group {
     margin-bottom: 1.5rem;
 }
@@ -382,7 +383,7 @@ footer {
     border-color: var(--primary);
 }
 
-/* Responsive */
+
 @media (max-width: 768px) {
     .nav-links {
         display: none;
