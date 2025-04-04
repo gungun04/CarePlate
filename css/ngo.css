@@ -56,22 +56,15 @@ header {
     margin-right: 10px;
 }
 
-a {
-    display: inline-block;
-    text-decoration: none;
-    margin-right: 600px;
-    font-size: 16px;
-    font-weight: 600;
-    padding: 5px 10px;
-    color: rgb(37, 35, 35);
-    background-color:  white; /* Primary color */
-    border-radius: 8px;
-    transition: all 0.3s ease-in-out;
+
+a:hover {
+    color: var(--secondary-light);
 }
 
 .user-nav {
     display: flex;
     align-items: center;
+    margin-left: 500px;
 }
 
 .user-info {
@@ -97,6 +90,18 @@ a {
     align-items: center;
     justify-content: center;
     font-weight: bold;
+}
+
+a {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 5px 5px;
+    color: white;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+    margin-left: 300px;
 }
 
 .main-content {
